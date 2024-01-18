@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        button{
+            border: none;
+            padding: 15px;
+            background-color: rgb(69, 0, 118);
+            color: #fff;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:active{
+            transform: scale(0.9);
+        }
+        progress{
+            accent-color: #fff;
+            display: none;
+        }
+        .animation{
+            animation:  btn 0.6s linear;
+        }
+        @keyframes btn{
+            0%{
+                transform: translateY(-50px);
+            }
+            80%{
+                transform: translateY(-100px);
+            }
+            100%{
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+   
+    <button type="button" id="btn" onclick="buttonDownload()">
+        <span id="text">Download</span>
+        <progress id="progress" min="0" max="100" value="0">
+
+        </progress>
+    </button>
+
+    <script>
+        let presentValue = 0;
+        function downloadProgress (){
+            if(presentValue<100){
+                presentValue++;
+                document.getElementById('progress').value=presentValue;
+                document.getElementById('text').innerHTML= "downloading 🥱..."
+            }
+            else{
+                document.getElementById('progress').style.display ="none";
+                document.getElementById('text').innerHTML= "downloaded 👍"
+                document.getElementById('btn').classList.add('animation');
+                document.getElementById('btn').style.backgroundColor = "green"
+            }
+        }
+
+     function buttonDownload(){
+        document.getElementById('progress').style.display = "block";
+        setInterval('downloadProgress()', 100);
+     }
+
+    </script>
+    
+</body>
+</html>
